@@ -1,38 +1,30 @@
-pipeline {
+stage('Build Docker Image') {
+    steps {
+        bat 'docker build -t dev1:%BUILD_NUMBER% .'
+    }
+}
 
-    agent any
+stage('Load Image into Minikube') {
+    steps {
+        bat 'minikube image load dev1:%BUILD_NUMBER%'
+    }
+}
 
-    stages {
+stage('Deploy to Kubernetes') {
+    steps {
+        bat 'kubectl apply -f deployment.yaml'
+        bat 'kubectl apply -f service.yaml'
+    }
+}
 
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
+stage('Update Kubernetes Image') {
+    steps {
+        bat 'kubectl set image deployment/devops-web-deployment devops-container=dev1:%BUILD_NUMBER%'
+    }
+}
 
-        stage('Build Docker Image') {
-            steps {
-                bat 'docker build -t dev1 .'
-            }
-        }
-
-        stage('Stop Old Container') {
-            steps {
-                bat 'docker stop dev-container1 || exit 0'
-            }
-        }
-
-        stage('Remove Old Container') {
-            steps {
-                bat 'docker rm dev-container1 || exit 0'
-            }
-        }
-
-        stage('Run New Container') {
-            steps {
-                bat 'docker run -d -p 8082:80 --name dev-container1 dev1'
-            }
-        }
-
+stage('Check Deployment') {
+    steps {
+        bat 'kubectl rollout status deployment/devops-web-deployment'
     }
 }
