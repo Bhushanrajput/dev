@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevOps Practice Website</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <nav>
+            <div class="logo">DevOps Lab</div>
+
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#tools">Tools</a></li>
+                <li><a href="#about">About</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+
+        <h1>My DevOps Practice Project</h1>
+
+        <p>
+            Git → GitHub → Jenkins → Docker
+        </p>
+
+        <button onclick="showMessage()">
+            Test Website
+        </button>
+
+        <p id="message"></p>
+
+    </section>
+
+
+    <section id="tools" class="tools">
+
+        <h2>DevOps Tools</h2>
+
+        <div class="cards">
+
+            <div class="card">
+                <h3>Git</h3>
+                <p>Version control system used to track code changes.</p>
+            </div>
+
+            <div class="card">
+                <h3>GitHub</h3>
+                <p>Remote repository used to store and manage source code.</p>
+            </div>
+
+            <div class="card">
+                <h3>Jenkins</h3>
+                <p>Automation server used to create CI/CD pipelines.</p>
+            </div>
+
+            <div class="card">
+                <h3>Docker</h3>
+                <p>Container platform used to package and run the application.</p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section id="about" class="about">
+
+        <h2>About Project</h2>
+
+        <p>
+            This website is created for practicing a complete DevOps workflow.
+        </p>
+
+    </section>
+
+
+    <footer>
+
+        <p>
+            DevOps Practice Project
+        </p>
+
+    </footer>
+
+
+    <script>
+
+        function showMessage() {
+
+            document.getElementById("message").innerText =
+                "Website is working successfully!";
+
+        }
+
+    </script>
+
+</body>
+
+</html>
